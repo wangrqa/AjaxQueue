@@ -4,12 +4,13 @@ function ajaxQueue(url,options,queue) {
     options = options|| {};
 
     if(!requestQueue[queue]) requestQueue[queue] = [];
+    
+    var userCompleteListener = options.completeListener;
 
-    options.completeListener = function() {       
+    options.completeListener = function() {
         
-        if(options.completeListener) {
-            
-            options.completeListener.apply(this,arguments);        
+        if(userCompleteListener) {
+            userCompleteListener.apply(this,arguments);        
         };
         
         requestQueue[queue].shift();        
